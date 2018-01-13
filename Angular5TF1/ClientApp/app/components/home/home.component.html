@@ -1,16 +1,178 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-    <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-    <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>
-    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-    <li><strong>Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app takes over.</li>
-    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance injected is into the page.</li>
-    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-</ul>
+<div align="center">
+    <h1>Manage Devtools </h1>
+</div>
+<hr style="height: 1px;color: #123455;background-color: #d55500;border: none;color: #d55500;" />
+<p *ngIf="!ToolsInventory"><em>Loading Tools please Wait ! ...</em></p>
+<table id="tblContainer" style='width: 99%;table-layout:fixed;'>
+    <tr>
+        <td>
+            <table style="background-color:#FFFFFF; border: dashed 3px #FFFFFF; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="2"
+                   cellspacing="2">
+                <tr style="height: 30px;  color:#123455 ;border: solid 1px #659EC7;">
+                    <td width="40px"> </td>
+                    <td width="50%">
+                        <h1> Add New Tool <strong style="color:#0094ff"> </strong></h1>
+
+                    </td>
+                    <td align="right">
+                        <button (click)=AddTool() style="background-color:#336699;color:#FFFFFF;font-size:large;width:260px;height:50px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;">
+                            Add New Tool
+                        </button>
+
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <hr style="height: 1px;color: #123455;background-color: #d55500;border: none;color: #d55500;" />
+        </td>
+    </tr>
+    <tr *ngIf="AddTable">
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <table style="background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding :5px;width :99%;table-layout:fixed;" cellpadding="2" cellspacing="2">
+                            <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                                <td width="40"></td>
+                                <td>
+                                    <h2>Insert/Edit Tool: </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100"></td>
+                                <td>
+                                    <table style="color:#336699;font-size:large; padding :5px;" cellpadding="12" cellspacing="16">
+                                        <tr>
+                                            <td><b>Tool ID: </b> </td>
+                                            <td>
+                                                <input type="number" #ToolID (ngModel)="sToolID" value="{{sToolID}}" style="background-color:tan" readonly>
+                                            </td>
+                                            <td width="20"> </td>
+                                            <td><b>Name: </b> </td>
+                                            <td>
+                                                <input type="text" #ToolName (ngModel)="sName" value="{{sName}}" required>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Category ID </b> </td>
+                                            <td>
+                                                <input type="number" #CategoryID (ngModel)="sCategoryID" value="{{sCategoryID}}" min="50" required>
+                                            </td>
+                                            <td width="20"> </td>
+                                            <td><b>Description </b> </td>
+                                            <td>
+                                                <input type="text" #Description (ngModel)="sDescription" value="{{sDescription}}" required>
+                                            </td>
+                                           
+                                        </tr>
+                                        <tr>
+                                           
+                                            <td><b>Get it </b> </td>
+                                            <td>
+                                                <input type="text" #Aquire (ngModel)="sAquire" value="{{sAquire}}" required>
+                                            </td>
+                                            <td width="20"> </td>
+                                            <td><b>Link </b> </td>
+                                            <td>
+                                                <input type="text" #UrlRef (ngModel)="sUrlRef" value="{{sUrlRef}}" required>
+                                            </td>
+                                            <td width="20"> </td>
+                                            </tr>
+                                        <tr>
+                                            <td align="right" colspan="2">
+                                                <button (click)=addToolDetails(ToolID.value,ToolName.value,CategoryID.value,Description.value,Aquire.value,UrlRef.value) style="background-color:#336699;color:#FFFFFF;font-size:large;width:220px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;">
+                                                    Save
+                                                </button>
+                                            </td>
+                                            <td>
+
+                                                <button (click)=closeEdits() style="background-color:#336699;color:#FFFFFF;font-size:large;width:180px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;">
+                                                    Close
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <hr style="height: 1px;color: #123455;background-color: #d55500;border: none;color: #d55500;" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+            <table class='table' style="background-color:#FFFFFF; border:2px #6D7B8D; padding:5px;width:99%;table-layout:fixed;" cellpadding="2" cellspacing="2" *ngIf="ToolsInventory">
+                <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                    <td width="70" align="center">Edit</td>
+                    <td width="70" align="center">Delete</td>
+                    <td width="70" align="center">Tool ID</td>
+                    <td width="120" align="center">Tool Name</td>
+                    <td width="120" align="center">Category ID</td>
+                    <td width="120" align="center">Description</td>
+                    <td width="120" align="center">Get it</td>
+                    <td width="120" align="center">URL</td>
+                </tr>
+                <tbody *ngFor="let INVY  of ToolsInventory">
+                    <tr>
+                        <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#9F000F">
+                                <button (click)=editToolDetails(INVY.toolID,INVY.name,INVY.categoryID,INVY.description,INVY.aquire,INVY.urlRef)
+                                        style="background-color:#336699;color:#FFFFFF;font-size:large;width:80px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;">
+                                    Edit
+                                </button>
+                               <!--  <img src="{{imgEdit}}"  style="height:32px;width:32px" (click)=editToolDetails(INVY.toolID,ToolsInventory.name,ToolsInventory.categoryID,ToolsInventory.description,ToolsInventory.aquire,ToolsInventory.urlRef)> -->
+                            </span>
+                        </td>
+                        <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#9F000F">
+                                <button (click)=deleteTool(INVY.toolID)
+                                        style="background-color:#336699;color:#FFFFFF;font-size:large;width:80px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;">
+                                    Delete
+                                </button>
+                                <!-- <img src="{{imgDelete}}" style="height:32px;width:32px" (click)=deleteStudentsDetails(StudentMasters.stdID)>-->
+                            </span>
+                        </td>
+                        <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.toolID}}</span>
+                        </td>
+                        <td align="left" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.name}}</span>
+                        </td>
+
+                        <td align="right" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.categoryID}}</span>
+                        </td>
+
+                        <td align="right" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.description}}</span>
+                        </td>
+
+                        <td align="right" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.aquire}}</span>
+                        </td>
+                        <td align="right" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                            <span style="color:#336699">{{INVY.urlRef}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
